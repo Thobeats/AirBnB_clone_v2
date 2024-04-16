@@ -48,7 +48,7 @@ class HBNBCommand(cmd.Cmd):
         # scan for general formating - i.e '.', '(', ')'
         if not ('.' in line and '(' in line and ')' in line):
             return line
-        
+
         try:  # parse line left to right
             pline = line[:]  # parsed line
 
@@ -75,7 +75,7 @@ class HBNBCommand(cmd.Cmd):
                 pline = pline[2].strip()  # pline is now str
                 if pline:
                     # check for *args or **kwargs
-                    if pline[0] == '{' and pline[-1] =='}'\
+                    if pline[0] == '{' and pline[-1] == '}' \
                             and type(eval(pline)) is dict:
                         _args = pline
                     else:
@@ -124,7 +124,7 @@ class HBNBCommand(cmd.Cmd):
         elif args['cls_name'] not in HBNBCommand.classes:
             print("** class doesn't exist **")
             return
-        
+
         new_instance = HBNBCommand.classes[args['cls_name']]()
         if args['cmd_args'] is not None:
             """
@@ -140,20 +140,18 @@ class HBNBCommand(cmd.Cmd):
                 and if there are quotes or
                 underscores in it
                 """
-
-
                 if value[0] == '"':
                     value = value.strip('"')
                     checkQuotes = re.search("\"", value[0:-1])
                     if checkQuotes:
                         offset = checkQuotes.span()
-                        value = value[:offset[0]] + '''\\"''' + value[offset[1]:]
-                    
+                        value = value[:offset[0]] + '\\"' + value[offset[1]:]
+
                     checkUnScores = re.search("_", value)
                     if checkUnScores:
                         value = value.replace("_", " ")
                 else:
-                    checkFloat = re.search("\.", value)
+                    checkFloat = re.search(r"[.]", value)
                     if checkFloat:
                         value = float(value)
                     else:
@@ -161,14 +159,14 @@ class HBNBCommand(cmd.Cmd):
                 setattr(new_instance, key, value)
             new_instance.save()
             print(new_instance.id)
-            return                    
+            return
         else:
             new_instance.save()
             print(new_instance.id)
             return
-    
+
     def help_create(self):
-        """ Help information for the create method """
+        """Help information for the create method """
         print("Creates a class of any type")
         print("[Usage]: create <className>\n")
 
@@ -226,9 +224,8 @@ class HBNBCommand(cmd.Cmd):
             return
 
         key = c_name + "." + c_id
-
         try:
-            del(storage.all()[key])
+            del (storage.all()[key])
             storage.save()
         except KeyError:
             print("** no instance found **")
@@ -355,7 +352,7 @@ class HBNBCommand(cmd.Cmd):
                 new_dict.__dict__.update({att_name: att_val})
 
         new_dict.save()  # save updates to file
-    
+
     @staticmethod
     def parse(arg):
         """
@@ -380,6 +377,7 @@ class HBNBCommand(cmd.Cmd):
         """ Help information for the update class """
         print("Updates an object with new information")
         print("Usage: update <className> <id> <attName> <attVal>\n")
+
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()
