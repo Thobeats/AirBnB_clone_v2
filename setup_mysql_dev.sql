@@ -11,6 +11,7 @@ CREATE DATABASE IF NOT EXISTS hbnb_dev_db;
 USE hbnb_dev_db;
 
 --- create the USER 
+DROP USER IF EXISTS 'hbnb_dev'@'localhost';
 CREATE USER IF NOT EXISTS 'hbnb_dev'@'localhost' IDENTIFIED BY 'hbnb_dev_pwd';
 
 --- give the user privileges
