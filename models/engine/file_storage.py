@@ -63,4 +63,5 @@ class FileStorage:
             key = "{}.{}".format(obj.__class__.__name__, obj.id)
             check = self.all().get(key, 'null')
             if check != 'null':
+                del obj
                 del self.all()[key]
