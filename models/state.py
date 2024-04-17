@@ -23,4 +23,3 @@ class State(BaseModel, Base):
         """
         from models import storage
         return [key for key in storage.all(State).items() if key == State.id]
-

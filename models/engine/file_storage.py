@@ -14,7 +14,7 @@ class FileStorage:
             return {key: value
                     for key, value
                     in FileStorage.__objects.items()
-                    if type(value) == cls}
+                    if isinstance(value, cls)}
         return FileStorage.__objects
 
     def new(self, obj):

@@ -76,7 +76,7 @@ class DBStorage:
 
     def save(self):
         """
-        commit all changes of the current database session 
+        commit all changes of the current database session
         """
         self.__session.commit()
 
@@ -93,8 +93,7 @@ class DBStorage:
         create the current database session
         """
         Base.metadata.create_all(self.__engine)
-        session_factory = sessionmaker(bind=self.__engine, expire_on_commit=False)
+        session_factory = sessionmaker(bind=self.__engine,
+                                       expire_on_commit=False)
         Session = scoped_session(session_factory)
         self.__session = Session()
-
-
