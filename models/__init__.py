@@ -13,8 +13,6 @@ from models.state import State
 from models.amenity import Amenity
 
 
-
-
 HBNB_TYPE_STORAGE = getenv('HBNB_TYPE_STORAGE')
 if HBNB_TYPE_STORAGE == 'db':
     from models.engine.db_storage import DBStorage
