@@ -4,6 +4,7 @@
 from models.base_model import BaseModel, Base
 from sqlalchemy import Column, String
 from sqlalchemy.orm import relationship
+from models.city import City
 
 
 class State(BaseModel, Base):
@@ -23,4 +24,8 @@ class State(BaseModel, Base):
         State.id
         """
         from models import storage
-        return [key for key in storage.all(State).items() if key == State.id]
+        cities = []
+        for key, obj in storage.all(City).items():
+            if obj.place_id == self.id:
+                cities.append(obj)
+        return cities
