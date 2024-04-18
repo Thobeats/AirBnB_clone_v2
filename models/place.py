@@ -44,9 +44,9 @@ class Place(BaseModel, Base):
                             default=0,
                             nullable=False)
     latitude = Column(Float,
-                      nullable=False)
+                      nullable=True)
     longitude = Column(Float,
-                       nullable=False)
+                       nullable=True)
     amenity_ids = []
 
     if storage_type == 'db':
