@@ -1,11 +1,11 @@
 #!/usr/bin/python3
 """ Place Module for HBNB project """
 from models.base_model import BaseModel, Base
-from models.amenity import Amenity
 from sqlalchemy import Column, ForeignKey, String, Integer, Float, Table
 from sqlalchemy.orm import relationship
 from models.review import Review
 from os import getenv
+storage_type = getenv('HBNB_TYPE_STORAGE')
 place_amenity = Table('place_amenity',
                       Base.metadata,
                       Column('place_id', String(60),
@@ -30,7 +30,7 @@ class Place(BaseModel, Base):
     name = Column(String(128),
                   nullable=False)
     description = Column(String(1024),
-                         nullable=False)
+                         nullable=True)
     number_rooms = Column(Integer,
                           default=0,
                           nullable=False)
@@ -49,40 +49,44 @@ class Place(BaseModel, Base):
                        nullable=False)
     amenity_ids = []
 
-    reviews = relationship('Review', cascade="all, delete", backref="place")
+    if storage_type == 'db':
+        reviews = relationship('Review', cascade="all, delete", backref="place")
 
-    amenities = relationship('Amenity',
+        amenities = relationship('Amenity',
                                 secondary=place_amenity,
-                                back_populates="places",
+                                back_populates='place_amenities',
                                 viewonly=False)
-    @property
-    def reviews(self):
-        """
-        returns the list of that returns the list
-        of Review instances with place_id
-        equals to the current Place.id
-        """
-        from models import storage
-        allReviews = []
-        for key, obj in storage.all(Review).items():
-            if obj.place_id == self.id:
-                allReviews.append(obj)
-        return allReviews
+    else:
+        @property
+        def reviews(self):
+            """
+            returns the list of that returns the list
+            of Review instances with place_id
+            equals to the current Place.id
+            """
+            from models import storage
+            allReviews = []
+            for key, obj in storage.all(Review).items():
+                if obj.place_id == self.id:
+                    allReviews.append(obj)
+            return allReviews
 
-    @property
-    def amenities(self):
-        """
-        Get amenities from file storage
-        """
-        return self.amenity_ids
-    
-    @property.setter
-    def amenities(self):
-        """
-        Set the amenity ids
-        """
-        from models import storage
-        amenities = storage.all(Amenity)
-        for amenity in amenities.values():
-            if amenity.place_id == self.id:
-                self.amenity_ids.append(amenity)
+        @property
+        def amenities(self):
+            """
+            Get amenities from file storage
+            """
+            return self.__amenity_ids
+
+        @amenities.setter
+        def amenities(self):
+            """
+            Set the amenity ids
+            """
+            from models import storage
+            from models.amenity import Amenity
+
+            amenities = storage.all(Amenity)
+            for amenity in amenities.values():
+                if amenity.place_id == self.id:
+                    self.amenity_ids.append(amenity)
