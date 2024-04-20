@@ -50,12 +50,15 @@ class Place(BaseModel, Base):
     amenity_ids = []
 
     if storage_type == 'db':
-        reviews = relationship('Review', cascade="all, delete", backref="place")
+        reviews = relationship('Review',
+                               cascade="all, delete",
+                               backref="place")
 
         amenities = relationship('Amenity',
-                                secondary=place_amenity,
-                                back_populates='place_amenities',
-                                viewonly=False)
+                                 secondary=place_amenity,
+                                 back_populates='place_amenities',
+                                 viewonly=False
+                                 )
     else:
         @property
         def reviews(self):

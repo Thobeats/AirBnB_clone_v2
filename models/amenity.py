@@ -22,5 +22,5 @@ class Amenity(BaseModel, Base):
 
     if storage_type == 'db':
         place_amenities = relationship('Place',
-                                    secondary=place_amenity,
-                                    back_populates="amenities")
+                                       secondary=place_amenity,
+                                       back_populates="amenities")
