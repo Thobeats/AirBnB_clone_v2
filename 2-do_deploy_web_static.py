@@ -39,7 +39,7 @@ def do_deploy(archive_path):
 
         # create new symbolic link /data/web_static/current
         run("sudo ln -sf /data/web_static/releases/{} /data/web_static/current"
-            .format(archive_filename))
+            .format(archive_name))
         return True
     except Exception:
         return False
