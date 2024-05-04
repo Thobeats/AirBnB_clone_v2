@@ -27,18 +27,18 @@ def do_deploy(archive_path):
 
         # Uncompress the archive to the folder
         # /data/web_static/releases/<archive filename without extension>
-        run("mkdir -p /data/web_static/releases/{}".format(archive_name))
-        run("tar -xzf /tmp/{} -C /data/web_static/releases/{}"
+        run("sudo mkdir -p /data/web_static/releases/{}".format(archive_name))
+        run("sudo tar -xzf /tmp/{} -C /data/web_static/releases/{}"
             .format(archive_filename, archive_name))
 
         # delete the archive from the server
-        run("rm /tmp/{}".format(archive_filename))
+        run("sudo rm /tmp/{}".format(archive_filename))
 
         # Delete the symbolic link /data/web_static/current from the web server
-        run("rm /data/web_static/current")
+        run("sudo rm -f /data/web_static/current")
 
         # create new symbolic link /data/web_static/current
-        run("ln -sf /data/web_static/releases/{} /data/web_static/current"
+        run("sudo ln -sf /data/web_static/releases/{} /data/web_static/current"
             .format(archive_filename))
         return True
     except Exception:
