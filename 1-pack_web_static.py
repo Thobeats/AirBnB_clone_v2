@@ -22,7 +22,7 @@ def do_pack():
     # store in the versions folder
     storage_path = "versions/{}".format(archive)
 
-    archivedResult = local("tar -czf {} web_static/".format(storage_path))
+    archivedResult = local("tar -cvzf {} web_static/".format(storage_path))
     if archivedResult.failed:
         return None
     return (storage_path)
