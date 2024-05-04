@@ -24,7 +24,7 @@ def do_pack():
     # store in the versions folder
     storage_path = "versions/{}".format(archive)
 
-    archivedResult = local("tar -cvzf {} web_static/".format(storage_path))
+    archivedResult = local("sudo tar -cvzf {} web_static/".format(storage_path))
     if archivedResult.failed:
         return None
     return (storage_path)
@@ -70,7 +70,6 @@ def do_deploy(archive_path):
         return True
     except Exception:
         return False
-
 
 
 def deploy():
