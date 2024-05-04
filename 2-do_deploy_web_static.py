@@ -31,6 +31,14 @@ def do_deploy(archive_path):
         run("sudo tar -xzf /tmp/{} -C /data/web_static/releases/{}"
             .format(archive_filename, archive_name))
 
+        # Move the files from web_static into its parent folder
+        run("sudo mv /data/web_static/releases/{}/web_static/* /data/web_static/releases/{}"
+            .format(archive_name, archive_name))
+
+        # Remove the web_static folder
+        run("sudo -rmf /data/web_static/releases/{}/web_static"
+            .format(archive_name))
+
         # delete the archive from the server
         run("sudo rm /tmp/{}".format(archive_filename))
 
