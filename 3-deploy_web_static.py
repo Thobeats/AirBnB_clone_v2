@@ -22,6 +22,7 @@ def deploy():
 
     try:
         # deploy the archive
-        return do_deploy(archive_path)
+        result = do_deploy(archive_path)
+        return result
     except Exception:
         return False
