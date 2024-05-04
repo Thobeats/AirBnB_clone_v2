@@ -36,7 +36,7 @@ def do_deploy(archive_path):
             .format(archive_name, archive_name))
 
         # Remove the web_static folder
-        run("sudo -rmf /data/web_static/releases/{}/web_static"
+        run("sudo rm -R /data/web_static/releases/{}/web_static"
             .format(archive_name))
 
         # delete the archive from the server
