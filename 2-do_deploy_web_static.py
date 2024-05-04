@@ -32,7 +32,8 @@ def do_deploy(archive_path):
             .format(archive_filename, archive_name))
 
         # Move the files from web_static into its parent folder
-        run("sudo mv /data/web_static/releases/{}/web_static/* /data/web_static/releases/{}"
+        run("sudo mv /data/web_static/releases/{}/web_static/* \
+            /data/web_static/releases/{}"
             .format(archive_name, archive_name))
 
         # Remove the web_static folder
