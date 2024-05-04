@@ -15,7 +15,7 @@ def do_pack():
     generates a .tgz archive from the contents of the web_static folder
     """
     # create the versions folder
-    local("sudo mkdir -p versions")
+    local("mkdir -p versions")
 
     # archive name
     currentDate = datetime.now().strftime('%Y%m%d%H%M%S')
@@ -24,7 +24,7 @@ def do_pack():
     # store in the versions folder
     storage_path = "versions/{}".format(archive)
 
-    archivedResult = local("sudo tar -cvzf {} web_static/"
+    archivedResult = local("tar -cvzf {} web_static/"
                            .format(storage_path))
     if archivedResult.failed:
         return None
@@ -49,24 +49,24 @@ def do_deploy(archive_path):
 
         # Uncompress the archive to the folder
         # /data/web_static/releases/<archive filename without extension>
-        run("sudo mkdir -p /data/web_static/releases/{}".format(archive_name))
-        run("sudo tar -xzf /tmp/{} -C /data/web_static/releases/{}"
+        run("mkdir -p /data/web_static/releases/{}".format(archive_name))
+        run("tar -xzf /tmp/{} -C /data/web_static/releases/{}"
             .format(archive_filename, archive_name))
 
         # Move the files from web_static into its parent folder
-        run("sudo mv /data/web_static/releases/{}/web_static/* \
+        run("mv /data/web_static/releases/{}/web_static/* \
             /data/web_static/releases/{}"
             .format(archive_name, archive_name))
 
         # Remove the web_static folder
-        run("sudo rm -rf /data/web_static/releases/{}/web_static"
+        run("rm -rf /data/web_static/releases/{}/web_static"
             .format(archive_name))
 
         # Delete the symbolic link /data/web_static/current from the web server
-        run("sudo rm -rf /data/web_static/current")
+        run("rm -rf /data/web_static/current")
 
         # create new symbolic link /data/web_static/current
-        run("sudo ln -sf /data/web_static/releases/{} /data/web_static/current"
+        run("ln -sf /data/web_static/releases/{} /data/web_static/current"
             .format(archive_name))
         return True
     except Exception:
