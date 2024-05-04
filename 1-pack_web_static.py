@@ -24,5 +24,5 @@ def do_pack():
 
     archivedResult = local("tar -cvzf {} web_static/".format(storage_path))
     if archivedResult.failed:
-        return False
+        return None
     return (storage_path)
