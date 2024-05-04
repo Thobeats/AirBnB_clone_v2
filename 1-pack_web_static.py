@@ -14,8 +14,7 @@ def do_pack():
     generates a .tgz archive from the contents of the web_static folder
     """
     # create the versions folder
-    if os.path.isdir("versions") is False:
-        local("sudo mkdir -p versions")
+    local("sudo mkdir -p versions")
 
     # archive name
     currentDate = datetime.now().strftime('%Y%m%d%H%M%S')
