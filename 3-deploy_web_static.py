@@ -5,7 +5,7 @@ that creates and distributes an archive to your web servers,
 using the function deploy
 """
 from fabric.api import env, local, run, put
-from os.path import exists
+from os.path import exists, isdir
 from datetime import datetime
 do_pack = __import__('1-pack_web_static').do_pack
 env.hosts = ['54.237.67.242', '100.25.0.50']
@@ -59,11 +59,12 @@ def deploy():
     """
     # check if the path exists
     archive_path = do_pack()
-    if not archive_path:
+    if not isdir(archive_path):
         return False
 
     try:
         # deploy the archive
-        return do_deploy(archive_path)
+        result = do_deploy(archive_path)
+        print("result is: {}".format(result))
     except Exception:
         return False
