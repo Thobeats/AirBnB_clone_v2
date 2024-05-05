@@ -15,7 +15,7 @@ def do_pack():
     """
     # create the versions folder
     if os.path.isdir("versions") is False:
-        local("sudo mkdir -p versions")
+        local("mkdir -p versions")
 
     try:
         # archive name
