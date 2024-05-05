@@ -17,14 +17,15 @@ def do_pack():
     if os.path.isdir("versions") is False:
         local("sudo mkdir -p versions")
 
-    # archive name
-    currentDate = datetime.now().strftime('%Y%m%d%H%M%S')
-    archive = "web_static_{}.tgz".format(currentDate)
+    try:
+        # archive name
+        currentDate = datetime.now().strftime('%Y%m%d%H%M%S')
+        archive = "web_static_{}.tgz".format(currentDate)
 
-    # store in the versions folder
-    storage_path = "versions/{}".format(archive)
+        # store in the versions folder
+        storage_path = "versions/{}".format(archive)
 
-    archivedResult = local("tar -cvzf {} web_static/".format(storage_path))
-    if archivedResult.failed:
+        local("tar -cvzf {} web_static/".format(storage_path))
+        return (storage_path)
+    except Exception:
         return None
-    return (storage_path)
