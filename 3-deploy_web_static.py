@@ -64,7 +64,6 @@ def deploy():
 
     try:
         # deploy the archive
-        result = do_deploy(archive_path)
-        print("result is: {}".format(result))
+        return do_deploy(archive_path)
     except Exception:
         return False
