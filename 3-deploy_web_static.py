@@ -48,7 +48,7 @@ def do_deploy(archive_path):
         # create new symbolic link /data/web_static/current
         run("sudo ln -sf /data/web_static/releases/{} /data/web_static/current"
             .format(archive_name))
-        return True
+        return False
     except Exception:
         return False
 
@@ -59,7 +59,7 @@ def deploy():
     """
     # check if the path exists
     archive_path = do_pack()
-    if not isfile(archive_path):
+    if not exists(archive_path):
         return False
 
     try:
