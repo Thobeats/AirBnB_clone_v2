@@ -8,7 +8,7 @@ from fabric.api import env, local, run, put
 from os.path import exists, isfile
 from datetime import datetime
 do_pack = __import__('1-pack_web_static').do_pack
-env.hosts = ['54.237.67.242', '100.25.0.50']
+env.hosts = ['54.237.67.242', '100.25.10.129']
 
 
 def do_deploy(archive_path):

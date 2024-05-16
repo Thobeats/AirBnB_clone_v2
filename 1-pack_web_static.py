@@ -25,7 +25,7 @@ def do_pack():
         # store in the versions folder
         storage_path = "versions/{}".format(archive)
 
-        local("tar -cvzf {} web_static/".format(storage_path))
+        local("tar -czf {} web_static/".format(storage_path))
         return (storage_path)
     except Exception:
         return None
