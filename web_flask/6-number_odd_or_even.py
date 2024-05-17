@@ -49,7 +49,7 @@ def is_number_template(n):
 def is_number_odd_or_even(n):
     if n.isdigit():
         ntype = "odd"
-        if int(n) % 2 is 0:
+        if int(n) % 2 == 0:
             ntype = "even"
         return render_template("6-number_odd_or_even.html",
                                number=n, numbertype=ntype)
