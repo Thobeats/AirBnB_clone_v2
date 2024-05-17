@@ -33,7 +33,6 @@ def python_is_cool(text):
 def is_number(n):
     if n.isdigit():
         return "{} is a number".format(n)
-    return "{} is not a number".format(n)
 
 
 if __name__ == "__main__":
