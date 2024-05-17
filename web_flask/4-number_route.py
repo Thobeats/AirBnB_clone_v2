@@ -3,6 +3,7 @@
 Write a script that starts a Flask web application
 """
 from flask import Flask
+from flask import abort
 
 
 app = Flask(__name__)
@@ -33,6 +34,7 @@ def python_is_cool(text):
 def is_number(n):
     if n.isdigit():
         return "{} is a number".format(n)
+    return abort(404)
 
 
 if __name__ == "__main__":
