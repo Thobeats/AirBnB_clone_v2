@@ -51,7 +51,8 @@ def is_number_odd_or_even(n):
         ntype = "odd"
         if int(n) % 2 is 0:
             ntype = "even"
-        return render_template("6-number_odd_or_even.html", number=n, numbertype=ntype)
+        return render_template("6-number_odd_or_even.html",
+                               number=n, numbertype=ntype)
     return abort(404)
 
 
