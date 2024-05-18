@@ -18,8 +18,8 @@ def close(self):
     """
     removes current SQLAlchemy Session after each request
     """
-    
     storage.close()
+
 
 @app.route("/states_list", strict_slashes=False)
 def all_states():
@@ -31,7 +31,7 @@ def all_states():
     stateValues = states.values()
 
     return render_template('7-states_list.html', states=stateValues)
-    
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
