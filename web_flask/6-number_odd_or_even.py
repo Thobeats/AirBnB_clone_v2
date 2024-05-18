@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 """
 Write a script that starts a Flask web application
+check if n is odd or even: display a HTML page only
+if n is an integer
 """
 from flask import Flask
 from flask import abort
@@ -45,15 +47,12 @@ def is_number_template(n):
     return abort(404)
 
 
-@app.route("/number_odd_or_even/<n>", strict_slashes=False)
+@app.route("/number_odd_or_even/<int:n>", strict_slashes=False)
 def is_number_odd_or_even(n):
-    if n.isdigit():
-        ntype = "odd"
-        if int(n) % 2 == 0:
-            ntype = "even"
-        return render_template("6-number_odd_or_even.html",
-                               number=n, numbertype=ntype)
-    return abort(404)
+    value = "odd"
+    if n % 2 == 0:
+        value = "even"
+    return render_template("6-number_odd_or_even.html", n=n, value=value)
 
 
 if __name__ == "__main__":
