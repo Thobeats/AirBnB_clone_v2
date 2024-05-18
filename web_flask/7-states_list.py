@@ -9,6 +9,7 @@ from flask import abort
 from flask import render_template
 from models import storage
 from models.state import State
+from operator import attrgetter
 
 app = Flask(__name__)
 
@@ -28,9 +29,10 @@ def all_states():
     the states
     """
     states = storage.all(State)
-    stateValues = states.values()
+    state_values = states.values()
+    states_final = sorted(state_values, key=attrgetter('name'))
 
-    return render_template('7-states_list.html', states=stateValues)
+    return render_template('7-states_list.html', states=states_final)
 
 
 if __name__ == "__main__":
