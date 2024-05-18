@@ -65,3 +65,9 @@ class FileStorage:
             if check != 'null':
                 del obj
                 del self.all()[key]
+
+    def close(self):
+        """
+        Closes the File Storage
+        """
+        self.reload()
