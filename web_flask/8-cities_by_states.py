@@ -14,8 +14,8 @@ from operator import attrgetter
 app = Flask(__name__)
 
 
-@app.route("/states", strict_slashes=False)
-def all_states():
+@app.route("/cities_by_states", strict_slashes=False)
+def cities_by_states():
     """
     A function to get a list of all
     the states
@@ -23,21 +23,7 @@ def all_states():
     states = storage.all(State)
     state_values = states.values()
     states_final = sorted(state_values, key=attrgetter('name'))
-
-    return render_template('8-cities_by_states.html', states=states_final)
-
-
-@app.route("/states/<id>", strict_slashes=False)
-def all_states(id):
-    """
-    A function to get all the cities
-    in the state
-    """
-    states = storage.all(State)
-    state_values = states.values()
-    states_final = sorted(state_values, key=attrgetter('name'))
-
-    return render_template('8-cities_by_states.html', states=states_final)
+    return render_template('8-cities_by_states.html', states=state_values)
 
 
 @app.teardown_appcontext
@@ -49,4 +35,4 @@ def close(self):
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+    app.run(host="0.0.0.0", port=5001, debug=True)
