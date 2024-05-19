@@ -27,13 +27,5 @@ def all_states():
     return render_template('7-states_list.html', states=states_final)
 
 
-@app.teardown_appcontext
-def close(self):
-    """
-    removes current SQLAlchemy Session after each request
-    """
-    storage.close()
-
-
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
