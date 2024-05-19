@@ -12,10 +12,8 @@ from models.state import State
 from operator import attrgetter
 
 
-
 if __name__ == "__main__":
     app = Flask(__name__)
-
 
     @app.route("/states_list", strict_slashes=False)
     def all_states():
@@ -29,13 +27,11 @@ if __name__ == "__main__":
 
         return render_template('7-states_list.html', states=states_final)
 
-
     @app.teardown_appcontext
     def close_storage(exception):
         """
         removes current SQLAlchemy Session after each request
         """
         storage.close()
-
 
     app.run(host="0.0.0.0", port=5000)
