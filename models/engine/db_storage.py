@@ -2,8 +2,6 @@
 """
 This module defines a class to manage DB storage for hbnb clone
 """
-import json
-import models
 from models.amenity import Amenity
 from models.user import User
 from models.place import Place
