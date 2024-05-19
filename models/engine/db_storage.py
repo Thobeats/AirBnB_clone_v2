@@ -14,6 +14,7 @@ from models.base_model import Base
 import os
 from sqlalchemy import create_engine, MetaData
 from sqlalchemy.orm import sessionmaker, scoped_session
+import logging
 
 classes = {
         'User': User,
@@ -46,7 +47,7 @@ class DBStorage:
                                       HBNB_MYSQL_HOST,
                                       HBNB_MYSQL_DB),
                                       pool_pre_ping=True)
-        Base.metadata.create_all(self.__engine)
+        #Base.metadata.create_all(self.__engine)
         if HBNB_ENV == "test":
             Base.metadata.drop_all(self.__engine)
 
@@ -95,6 +96,10 @@ class DBStorage:
         create all tables in the database
         create the current database session
         """
+        # Configure logging
+        logging.basicConfig()
+        logging.getLogger('sqlalchemy.engine').setLevel(logging.INFO)
+
         Base.metadata.create_all(self.__engine)
         session_factory = sessionmaker(bind=self.__engine,
                                        expire_on_commit=False)

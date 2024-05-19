@@ -13,8 +13,7 @@ class BaseModel:
 
     id = Column(String(60),
                 primary_key=True,
-                nullable=False,
-                unique=True)
+                nullable=False)
 
     created_at = Column(DateTime,
                         nullable=False,
