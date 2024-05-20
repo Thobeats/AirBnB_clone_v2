@@ -42,8 +42,9 @@ def state_by_id(id):
         state = {}
         cities = {}
         status = False
-    return render_template('9-states.html', state=state, cities=cities, status=status)
-
+    return render_template('9-states.html', state=state,
+                           cities=cities,
+                           status=status)
 
 
 @app.teardown_appcontext
