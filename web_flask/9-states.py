@@ -35,8 +35,9 @@ def state_by_id(id):
     """
     states = storage.all(State)
     state = states["State.{}".format(id)]
+    cities = sorted(state.cities, key=attrgetter('name'))
 
-    return render_template('9-states.html', state=state)
+    return render_template('9-states.html', state=state, cities=cities)
 
 
 @app.teardown_appcontext
@@ -48,4 +49,4 @@ def teardown_appcontext(self):
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+    app.run(host="0.0.0.0", port=5001)
