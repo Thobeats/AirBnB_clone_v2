@@ -23,7 +23,12 @@ def cities_by_states():
     states = storage.all(State)
     state_values = states.values()
     states_final = sorted(state_values, key=attrgetter('name'))
-    return render_template('8-cities_by_states.html', states=state_values)
+    cities = list([{"id": city.id, "name":city.name} for city in state.cities] for state in states_final)[0]
+    cities.sort(key=lambda item:item['name'])
+    
+    return render_template('8-cities_by_states.html',
+            states=state_values,
+            cities=cities)
 
 
 @app.teardown_appcontext
@@ -35,4 +40,4 @@ def close(self):
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+    app.run(host="0.0.0.0", port=5000, debug=True)
