@@ -23,9 +23,8 @@ def cities_by_states():
     states = storage.all(State)
     state_values = states.values()
     states_final = sorted(state_values, key=attrgetter('name'))
-    print(type(states_final[0].cities))
     return render_template('8-cities_by_states.html',
-            states=state_values)
+            states=states_final)
 
 
 @app.teardown_appcontext
